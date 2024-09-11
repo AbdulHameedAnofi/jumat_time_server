@@ -1,0 +1,16 @@
+{
+  "name": "jumat_time_server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "This is the backend server for the jum'at server web application which is going to ease how we know the time of jum'at in a mosque close to us.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Abdulhameed Anofi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
