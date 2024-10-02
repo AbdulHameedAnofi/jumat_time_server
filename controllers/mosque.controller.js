@@ -37,14 +37,23 @@ export const addMosque = async (req, res) => {
     });
   }
 
+
   
   // const { name, address, jumat_start, jumat_end } = req.body;
 };
 
 export const mosques = async (req, res) => {
-  const mosques = await Mosque.find();
+
+  let search = req.query.search;
+
+  if (!search) {
+    search = "";
+  }
 
   try {
+
+    const mosques = await Mosque.find({name: {$regex: search, $options: 'i'}}).sort({_id: -1});
+
     res.status(200).json({
       message: "Mosques fetched successfully",
       mosques: mosques
@@ -55,5 +64,37 @@ export const mosques = async (req, res) => {
       error: error.message
     });
   }
+}
 
+export const deleteMosque = async (req, res) => {
+  const mosque = req.query.mosque;
+
+  try {
+    await Mosque.deleteOne({name: mosque});
+    res.status(200).json({
+      message: "Mosque deleted successfully"
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error deleting mosque",
+      error: error.message
+    });
+  }
+}
+
+export const editMosque = async (req, res) => {
+  const mosque = req.query.mosque;
+  const body = req.body;
+
+  try {
+    await Mosque.updateOne({name: mosque}, body);
+    res.status(200).json({
+      message: "Mosque updated successfully"
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error updating mosque",
+      error: error.message
+    });
+  }
 }
