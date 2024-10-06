@@ -14,13 +14,20 @@ export const addMosque = async (req, res) => {
       errors: errors.array()
     });  
   }
-  
+
+  const convertTo12HourFormat = (time) => {
+    let [hours, minutes] = time.split(':');
+    const period = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12; // Convert 0 to 12 for 12 AM
+    return `${hours}:${minutes}`;
+  };
+
   const mosque = new Mosque({
     name: body.name,
     address: body.address,
     link: body.link,
-    jumat_start: body.jumat_start,
-    jumat_end: body.jumat_end
+    jumat_start: convertTo12HourFormat(body.jumat_start),
+    jumat_end: convertTo12HourFormat(body.jumat_end)
   })
 
   try {
