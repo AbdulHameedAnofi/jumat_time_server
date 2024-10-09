@@ -40,7 +40,8 @@ To start the server, run:
 npm start
 ```
 
-For more detailed usage instructions, refer to the [Usage](#usage) section.
+## Contributing
+We welcome contributions to the Jum'at Time Server project! To contribute See [CONTRIBUTEING](CONTRIBUTING)
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
